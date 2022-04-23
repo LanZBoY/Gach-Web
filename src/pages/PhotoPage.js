@@ -1,13 +1,13 @@
-import React from 'react';
-import Bar from '../components/Bar';
+import React from "react";
+import Bar from "../components/Bar";
 
 const PhotoPage = () => {
-    return (
-        <>
-            <Bar/>
-            <div>圖片</div>
-        </>
-    );
-}
+  return (
+    <>
+      <Bar />
+      <div>圖片</div>
+    </>
+  );
+};
 
 export default PhotoPage;

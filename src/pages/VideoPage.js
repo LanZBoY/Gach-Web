@@ -1,13 +1,13 @@
-import React from 'react';
-import Bar from '../components/Bar';
+import React from "react";
+import Bar from "../components/Bar";
 
 const VideoPage = () => {
-    return (
-        <>
-          <Bar/>
-          <div>Video</div>  
-        </>
-    );
-}
+  return (
+    <>
+      <Bar />
+      <div>Video</div>
+    </>
+  );
+};
 
 export default VideoPage;
