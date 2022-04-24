@@ -1,4 +1,4 @@
-import { listAll, ref } from "firebase/storage";
+import { listAll, ref, uploadBytes } from "firebase/storage";
 import React, { useEffect, useState } from "react";
 import getInstanceStorage from "../utils/firebaseAPI";
 import Bar from "../components/Bar";
@@ -8,16 +8,20 @@ import { Button } from "react-bootstrap";
 const PdfViewPage = () => {
   const [listFile, setListFile] = useState([]);
   const storage = getInstanceStorage();
-  const listPDFRef = ref(storage, "/PDF");
 
   function loadData() {
+    const listPDFRef = ref(storage, "/PDF");
     listAll(listPDFRef).then((res) => {
       setListFile(res.items);
     });
   }
 
-  function uploadData(){
-
+  function uploadData(event){
+    const file = event.target.files[0]
+    const uploadPDFRef = ref(storage, `/PDF/${file.name}`);
+    uploadBytes(uploadPDFRef, file).then((snapshot) =>{
+      loadData();
+    })
   }
 
   useEffect(() => {
@@ -30,7 +34,7 @@ const PdfViewPage = () => {
       <Button onClick={loadData} className="me-2">
         重新整理
       </Button>
-      <input title="uploadFile" type='file'/>
+      <input type='file' onChange={uploadData}/>
       {listFile.map((item) => {
         return <PDFList fileRef={item} key={item.name} />;
       })}
