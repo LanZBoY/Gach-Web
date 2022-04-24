@@ -1,9 +1,12 @@
+import { getDownloadURL } from "firebase/storage";
 import React from "react";
 import { ListGroupItem, Button } from "react-bootstrap";
 
-const PDFList = ({ filename }) => {
+const PDFList = ({ fileRef }) => {
   function openFile() {
-    alert("OpenEvent");
+    getDownloadURL(fileRef).then((url) => {
+      window.open(url)
+    })
   }
 
   return (
@@ -14,7 +17,7 @@ const PDFList = ({ filename }) => {
       as={Button}
       className="rounded-pill"
     >
-      {filename}
+      {fileRef.name}
     </ListGroupItem>
   );
 };

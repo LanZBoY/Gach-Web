@@ -8,12 +8,16 @@ import { Button } from "react-bootstrap";
 const PdfViewPage = () => {
   const [listFile, setListFile] = useState([]);
   const storage = getInstanceStorage();
-  const listRef = ref(storage, "/PDF");
+  const listPDFRef = ref(storage, "/PDF");
 
   function loadData() {
-    listAll(listRef).then((res) => {
+    listAll(listPDFRef).then((res) => {
       setListFile(res.items);
     });
+  }
+
+  function uploadData(){
+
   }
 
   useEffect(() => {
@@ -26,11 +30,9 @@ const PdfViewPage = () => {
       <Button onClick={loadData} className="me-2">
         重新整理
       </Button>
-      <Button variant="success" className="me-2">
-        上傳檔案
-      </Button>
+      <input title="uploadFile" type='file'/>
       {listFile.map((item) => {
-        return <PDFList filename={item.name} key={item.name} />;
+        return <PDFList fileRef={item} key={item.name} />;
       })}
     </>
   );
