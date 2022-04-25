@@ -5,8 +5,8 @@ import { ListGroupItem, Button } from "react-bootstrap";
 const PDFList = ({ fileRef }) => {
   function openFile() {
     getDownloadURL(fileRef).then((url) => {
-      window.open(url)
-    })
+      window.open(url);
+    });
   }
 
   return (

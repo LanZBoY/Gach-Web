@@ -16,12 +16,12 @@ const PdfViewPage = () => {
     });
   }
 
-  function uploadData(event){
-    const file = event.target.files[0]
+  function uploadData(event) {
+    const file = event.target.files[0];
     const uploadPDFRef = ref(storage, `/PDF/${file.name}`);
-    uploadBytes(uploadPDFRef, file).then((snapshot) =>{
+    uploadBytes(uploadPDFRef, file).then((snapshot) => {
       loadData();
-    })
+    });
   }
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const PdfViewPage = () => {
       <Button onClick={loadData} className="me-2">
         重新整理
       </Button>
-      <input type='file' onChange={uploadData}/>
+      <input type="file" onChange={uploadData} />
       {listFile.map((item) => {
         return <PDFList fileRef={item} key={item.name} />;
       })}
