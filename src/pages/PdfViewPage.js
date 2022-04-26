@@ -1,42 +1,53 @@
 import { listAll, ref, uploadBytes } from "firebase/storage";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import getInstanceStorage from "../utils/firebaseAPI";
 import Bar from "../components/Bar";
 import PDFList from "../components/PDFList";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 const PdfViewPage = () => {
-  const [listFile, setListFile] = useState([]);
   const storage = getInstanceStorage();
-
+  const [listFile, setListFile] = useState([])
+  const selectFile = useRef()
   function loadData() {
-    const listPDFRef = ref(storage, "/PDF");
+    const listPDFRef = ref(storage, "/PDF")
     listAll(listPDFRef).then((res) => {
       setListFile(res.items);
     });
   }
 
-  function uploadData(event) {
-    const file = event.target.files[0];
-    const uploadPDFRef = ref(storage, `/PDF/${file.name}`);
-    uploadBytes(uploadPDFRef, file).then((snapshot) => {
-      loadData();
+  function selectData(event){
+    selectFile.current = event.target.files[0]
+  }
+
+  function uploadData() {
+    if(selectFile.current === undefined){
+      alert("尚未選擇檔案")
+      return
+    }
+    const uploadPDFRef = ref(storage, `/PDF/${selectFile.current.name}`)
+    uploadBytes(uploadPDFRef, selectFile.current).then((snapshot) => {
+      loadData()
+      alert('上傳完成！！')
+
     });
   }
 
   useEffect(() => {
     loadData();
-  }, []);
+  }, [])
 
   return (
     <>
       <Bar />
-      <Button onClick={loadData} className="me-2">
-        重新整理
+      <Form.Group controlId="formFile">
+        <Form.Control type="file" onChange={selectData} size='sm'/>
+      </Form.Group>
+      <Button onClick={uploadData} className="me-2">
+        上傳檔案
       </Button>
-      <input type="file" onChange={uploadData} />
       {listFile.map((item) => {
-        return <PDFList fileRef={item} key={item.name} />;
+        return <PDFList fileRef={item} refreshData = {loadData} key={item.name} />
       })}
     </>
   );

@@ -1,24 +1,32 @@
-import { getDownloadURL } from "firebase/storage";
+import { getDownloadURL, deleteObject } from "firebase/storage";
 import React from "react";
-import { ListGroupItem, Button } from "react-bootstrap";
+import '../components/PDFList.css'
+import {  ButtonGroup, Button, Row, Col } from "react-bootstrap";
 
-const PDFList = ({ fileRef }) => {
+const PDFList = ({ fileRef, refreshData }) => {
   function openFile() {
     getDownloadURL(fileRef).then((url) => {
       window.open(url);
     });
   }
 
+  function deleteFile(){
+    deleteObject(fileRef).then(() => {
+      refreshData()
+      alert("刪除成功！！")
+    })
+  }
+
   return (
-    <ListGroupItem
-      action
-      onClick={openFile}
-      variant="primary"
-      as={Button}
-      className="rounded-pill"
-    >
-      {fileRef.name}
-    </ListGroupItem>
+    <Row id='fileName'>
+      <Col className="col-10">{fileRef.name}</Col>
+      <Col>
+        <ButtonGroup>
+          <Button onClick={openFile}>開啟</Button>
+          <Button variant="danger" onClick={deleteFile}>刪除</Button>
+        </ButtonGroup>
+      </Col>
+    </Row>
   );
 };
 
