@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
-export default function getInstanceStorage() {
+function getInstanceStorage() {
   const firebaseConfig = {
     apiKey: "AIzaSyAdTrlKUDL7YRGKmubX7hLrPtNOeqHowfo",
     authDomain: "gage-web.firebaseapp.com",
@@ -15,3 +15,5 @@ export default function getInstanceStorage() {
   const storage = getStorage(firebaseApp);
   return storage;
 }
+
+export { getInstanceStorage };

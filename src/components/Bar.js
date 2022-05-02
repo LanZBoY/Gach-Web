@@ -1,5 +1,5 @@
 import React from "react";
-import LoGo from '../assets/logo.jpg'
+import LoGo from "../assets/logo.jpg";
 import { Container, Navbar, Nav } from "react-bootstrap";
 
 const Bar = () => {
@@ -8,8 +8,9 @@ const Bar = () => {
       <Navbar bg="secondary" variant="dark" expand="lg" sticky="top">
         <Container>
           <Navbar.Brand href="#home">
-            <img src={LoGo} width='30px' height="30px"/>
-            水利網頁</Navbar.Brand>
+            <img src={LoGo} width="30px" height="30px" />
+            水利網頁
+          </Navbar.Brand>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">首頁</Nav.Link>
