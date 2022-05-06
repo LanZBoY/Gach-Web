@@ -1,6 +1,6 @@
 import { getDownloadURL } from "firebase/storage";
 import React, { useEffect, useState } from "react";
-
+import './PhotoView.css'
 const Photoview = ({ item }) => {
   const [url, setURL] = useState("");
 
@@ -12,7 +12,10 @@ const Photoview = ({ item }) => {
 
   return (
     <>
-      <img src={url} width="10%" height="10%"></img>
+      <li className="photoList">
+        <h1>{item.name}</h1>
+        <img src={url} className="photo"></img>
+      </li>
     </>
   );
 };

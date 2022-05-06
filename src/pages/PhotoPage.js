@@ -20,9 +20,12 @@ const PhotoPage = () => {
   return (
     <>
       <Bar />
-      {listFile.map((item) => (
+      <ul>
+        {listFile.map((item) => (
         <Photoview item={item} key={item.name} />
-      ))}
+        ))}
+      </ul>
+      
     </>
   );
 };
