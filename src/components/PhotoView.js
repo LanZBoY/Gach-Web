@@ -1,6 +1,6 @@
 import { getDownloadURL } from "firebase/storage";
 import React, { useEffect, useState } from "react";
-import './PhotoView.css'
+import "./PhotoView.css";
 const Photoview = ({ item }) => {
   const [url, setURL] = useState("");
 

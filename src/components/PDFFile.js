@@ -1,7 +1,7 @@
 import { getDownloadURL, deleteObject } from "firebase/storage";
 import React from "react";
 import "./PDFFile.css";
-import { ButtonGroup, Button, Row, Col } from "react-bootstrap";
+import { ButtonGroup, Button, Row, Col, Container } from "react-bootstrap";
 
 const PDFFile = ({ fileRef, refreshData }) => {
   function openFile() {
@@ -18,15 +18,13 @@ const PDFFile = ({ fileRef, refreshData }) => {
   }
 
   return (
-    <Row id="fileName">
-      <Col className="col-10">{fileRef.name}</Col>
-      <Col>
-        <ButtonGroup>
-          <Button onClick={openFile}>開啟</Button>
-          <Button variant="danger" onClick={deleteFile}>
-            刪除
-          </Button>
-        </ButtonGroup>
+    <Row id="fileName" className="justify-content-md-center">
+      <Col xs="8">{fileRef.name}</Col>
+      <Col xs="4">
+        <Button onClick={openFile}>開啟</Button>
+        <Button variant="danger" onClick={deleteFile}>
+          刪除
+        </Button>
       </Col>
     </Row>
   );

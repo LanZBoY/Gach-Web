@@ -3,11 +3,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { getInstanceStorage } from "../utils/firebaseAPI";
 import Bar from "../components/Bar";
 import PDFFile from "../components/PDFFile";
-import { Button, Form } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
+import uploadIcon from "../assets/upload-file-icon.png";
 
 const PdfViewPage = () => {
   const storage = getInstanceStorage();
   const [listFile, setListFile] = useState([]);
+  const buttonUploadRef = useRef(null);
   const selectFile = useRef();
   function loadData() {
     const listPDFRef = ref(storage, "/PDF");
@@ -32,6 +34,10 @@ const PdfViewPage = () => {
     });
   }
 
+  function hadleClick() {
+    buttonUploadRef.current.click();
+  }
+
   useEffect(() => {
     loadData();
   }, []);
@@ -39,17 +45,51 @@ const PdfViewPage = () => {
   return (
     <>
       <Bar />
-      <Form.Group controlId="formFile">
-        <Form.Control type="file" onChange={selectData} size="sm" />
-      </Form.Group>
-      <Button onClick={uploadData} className="me-2">
-        上傳檔案
-      </Button>
-      {listFile.map((item) => {
-        return (
-          <PDFFile fileRef={item} refreshData={loadData} key={item.name} />
-        );
-      })}
+      <Container
+        style={{
+          margin: "auto",
+          marginTop: "15%",
+          width: "75%",
+          border: "3px solid green",
+          padding: "10px",
+        }}
+      >
+        <Form.Group controlId="formFile" className="row">
+          <div className="col-6" style={{ padding: "10px" }}>
+            <div className="row">
+              <img src={uploadIcon} width="100px" height="400px"></img>
+            </div>
+            <div className="row">
+              <Button onClick={hadleClick}>
+                選擇檔案
+                <Form.Control
+                  type="file"
+                  onChange={selectData}
+                  className="form-control"
+                  ref={buttonUploadRef}
+                  style={{ display: "none" }}
+                />
+              </Button>
+            </div>
+            <div className="row">
+              <Button onClick={uploadData} className="form-control">
+                上傳檔案
+              </Button>
+            </div>
+          </div>
+          <div className="col-6">
+            {listFile.map((item) => {
+              return (
+                <PDFFile
+                  fileRef={item}
+                  refreshData={loadData}
+                  key={item.name}
+                />
+              );
+            })}
+          </div>
+        </Form.Group>
+      </Container>
     </>
   );
 };

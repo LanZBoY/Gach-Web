@@ -1,26 +1,48 @@
 import React from "react";
-import LoGo from "../assets/logo.jpg";
-import { Container, Navbar, Nav } from "react-bootstrap";
-
 const Bar = () => {
   return (
     <>
-      <Navbar bg="secondary" variant="dark" expand="lg" sticky="top">
-        <Container>
-          <Navbar.Brand href="#home">
-            <img src={LoGo} width="30px" height="30px" />
-            水利網頁
-          </Navbar.Brand>
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/">首頁</Nav.Link>
-              <Nav.Link href="/pdf_view">PDF檔案</Nav.Link>
-              <Nav.Link href="/photo">圖片檔案</Nav.Link>
-              <Nav.Link href="/video">影片專區</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom bg-secondary text-white">
+        <div className="col-1"></div>
+        <div className="col-7">
+          <a
+            href="/"
+            className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none"
+          >
+            <img
+              src="https://s3.ap-southeast-1.amazonaws.com/web-content.fcu.edu.tw/wp-content/uploads/sites/71/2021/04/09171129/mark.png"
+              width="45px"
+              height="45px"
+            />
+            <span className="fs-4 text-white">水利網頁</span>
+          </a>
+        </div>
+        <div className="col-3">
+          <ul className="nav nav-pills">
+            <li className="nav-item">
+              <a href="/" className="nav-link text-white" aria-current="page">
+                首頁
+              </a>
+            </li>
+            <li className="nav-item">
+              <a href="/pdf_view" className="nav-link text-white">
+                PDF檔案
+              </a>
+            </li>
+            <li className="nav-item">
+              <a href="/photo" className="nav-link text-white">
+                圖片檔案
+              </a>
+            </li>
+            <li className="nav-item">
+              <a href="/video" className="nav-link text-white">
+                影片專區
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div className="col-1"></div>
+      </header>
     </>
   );
 };
