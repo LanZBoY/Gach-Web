@@ -1,5 +1,6 @@
 import { getDownloadURL } from "firebase/storage";
 import React, { useEffect, useState } from "react";
+import { Row, Col } from "react-bootstrap";
 import "./PhotoView.css";
 const Photoview = ({ item }) => {
   const [url, setURL] = useState("");
@@ -12,10 +13,16 @@ const Photoview = ({ item }) => {
 
   return (
     <>
-      <li className="photoList">
-        <h1>{item.name}</h1>
-        <img src={url} className="photo"></img>
-      </li>
+      <Row className="photoList justify-content-md-center">
+        <Col sm={3}></Col>
+        <Col>
+          <figure className="figure">
+            <img id="photo" src={url} className="figure-img img-fluid rounded"></img>
+            <figcaption  className="figure-caption text-center ">{item.name}</figcaption >
+          </figure> 
+        </Col>
+        <Col sm={3}></Col>
+      </Row>
     </>
   );
 };

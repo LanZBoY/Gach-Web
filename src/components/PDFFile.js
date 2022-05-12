@@ -1,7 +1,7 @@
 import { getDownloadURL, deleteObject } from "firebase/storage";
 import React from "react";
 import "./PDFFile.css";
-import { ButtonGroup, Button, Row, Col, Container } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 
 const PDFFile = ({ fileRef, refreshData }) => {
   function openFile() {

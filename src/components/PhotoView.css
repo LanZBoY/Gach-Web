@@ -1,4 +1,3 @@
-.photoList img {
-  width: 10%;
-  height: 10%;
+#photo {
+  border: 1px solid;
 }

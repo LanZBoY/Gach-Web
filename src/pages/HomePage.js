@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import Bar from "../components/Bar";
 
 const HomePage = () => {
@@ -7,17 +6,19 @@ const HomePage = () => {
     <>
       <Bar />
       <header className="masthead">
-        <Container>
-          <div className="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
-            <div className="col-lg-8 align-self-end">
-              <h1 className="font-weight-bold">歡迎！！</h1>
-              <hr className="divider" />
-            </div>
-            <div className="col-lg-8 align-self-baseline">
-              <p className="text-white-75 mb-5">一個水利網頁的起點</p>
-            </div>
+        <div class="px-4 py-5 my-5 text-center">
+          <img
+            class="d-block mx-auto mb-4"
+            src="https://s3.ap-southeast-1.amazonaws.com/web-content.fcu.edu.tw/wp-content/uploads/sites/71/2021/04/09171129/mark.png"
+            alt=""
+          />
+          <h1 class="display-5 fw-bold">水利網頁</h1>
+          <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">
+              創校四系之一，多年來成功培育台灣專業水利人才，專業含括水利防災、水資源、水土保育、環境生態等領域之工程、規劃與管理。本系系友四千餘人，遍布各水利機關重要主管，為全國培育水利工程與管理之典範學系。
+            </p>
           </div>
-        </Container>
+        </div>
       </header>
     </>
   );
