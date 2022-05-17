@@ -11,7 +11,9 @@ const PdfViewPage = () => {
   const [listFile, setListFile] = useState([]);
   const buttonUploadRef = useRef(null);
   const selectFile = useRef();
-  const [selectFileInfo, setSelectFileInfo] = useState(<p className="text-center">尚未選擇檔案</p>);
+  const [selectFileInfo, setSelectFileInfo] = useState(
+    <p className="text-center">尚未選擇檔案</p>
+  );
 
   function loadData() {
     const listPDFRef = ref(storage, "/PDF");
@@ -22,7 +24,9 @@ const PdfViewPage = () => {
 
   function selectData(event) {
     selectFile.current = event.target.files[0];
-    setSelectFileInfo(<p className="text-center">點擊圖示上傳: {selectFile.current.name}</p>)
+    setSelectFileInfo(
+      <p className="text-center">點擊圖示上傳: {selectFile.current.name}</p>
+    );
   }
 
   function uploadData() {
@@ -61,7 +65,8 @@ const PdfViewPage = () => {
         <Form.Group controlId="formFile" className="row">
           <div className="col-6" style={{ padding: "10px" }}>
             <div className="row">
-              <img onClick={uploadData}
+              <img
+                onClick={uploadData}
                 src={uploadIcon}
                 width="100px"
                 height="400px"
@@ -71,7 +76,7 @@ const PdfViewPage = () => {
             </div>
             {selectFileInfo}
             <div className="row">
-              <Button onClick={hadleClick}>
+              <Button onClick={hadleClick} style={{ padding: "10px" }}>
                 選擇檔案
                 <Form.Control
                   type="file"
@@ -82,11 +87,6 @@ const PdfViewPage = () => {
                 />
               </Button>
             </div>
-            {/* <div className="row">
-              <Button onClick={uploadData} className="form-control">
-                上傳檔案
-              </Button>
-            </div> */}
           </div>
           <div className="col-6">
             {listFile.map((item) => {

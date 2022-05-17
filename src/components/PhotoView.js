@@ -17,9 +17,15 @@ const Photoview = ({ item }) => {
         <Col sm={3}></Col>
         <Col>
           <figure className="figure">
-            <img id="photo" src={url} className="figure-img img-fluid rounded"></img>
-            <figcaption  className="figure-caption text-center ">{item.name}</figcaption >
-          </figure> 
+            <img
+              id="photo"
+              src={url}
+              className="figure-img img-fluid rounded"
+            ></img>
+            <figcaption className="figure-caption text-center ">
+              {item.name}
+            </figcaption>
+          </figure>
         </Col>
         <Col sm={3}></Col>
       </Row>
