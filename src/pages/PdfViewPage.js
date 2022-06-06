@@ -1,13 +1,12 @@
 import { listAll, ref, uploadBytes } from "firebase/storage";
 import React, { useEffect, useRef, useState } from "react";
-import { getInstanceStorage } from "../utils/firebaseAPI";
+import { storage } from "../utils/firebaseAPI";
 import Bar from "../components/Bar";
 import PDFFile from "../components/PDFFile";
 import { Button, Container, Form } from "react-bootstrap";
 import uploadIcon from "../assets/upload-file-icon.png";
 
 const PdfViewPage = () => {
-  const storage = getInstanceStorage();
   const [listFile, setListFile] = useState([]);
   const buttonUploadRef = useRef(null);
   const selectFile = useRef();
