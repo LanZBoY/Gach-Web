@@ -1,3 +1,12 @@
-#photo {
-  border: 1px solid;
+.post {
+  border: none;
+  box-shadow: 0 2px 6px #ccc;
+  border-radius: 10px;
+  word-wrap: break-word;
+}
+.postContent{
+  text-align: center;
+}
+.postTitle{
+  text-align: center;
 }
