@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
-import { getFirestore } from 'firebase/firestore'
+import { getFirestore } from "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyAdTrlKUDL7YRGKmubX7hLrPtNOeqHowfo",
   authDomain: "gage-web.firebaseapp.com",
