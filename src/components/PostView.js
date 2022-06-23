@@ -7,11 +7,11 @@ const Postview = ({ item }) => {
   const [imgURL, setimgURL] = useState(null);
   const createDate = new Date(item.createTime.toMillis());
   useEffect(() => {
-    const pathRef = ref(storage, 'Photo/'+ item.photoPath)
-    getDownloadURL(pathRef).then((url)=>{
-      setimgURL(url)
-    })
-  },[item.photoPath])
+    const pathRef = ref(storage, "Photo/" + item.photoPath);
+    getDownloadURL(pathRef).then((url) => {
+      setimgURL(url);
+    });
+  }, [item.photoPath]);
   return (
     <>
       <Row className="post">
@@ -27,7 +27,6 @@ const Postview = ({ item }) => {
           <Figure.Image width={300} height={300} src={imgURL}></Figure.Image>
           <Figure.Caption>{`${createDate.getFullYear()}-${createDate.getDate()}-${createDate.getDay()} ${createDate.getHours()}:${createDate.getMinutes()}:${createDate.getSeconds()} 上傳`}</Figure.Caption>
         </Col>
-        
       </Row>
     </>
   );
