@@ -23,7 +23,7 @@ const Postview = ({ item }) => {
             <p>{item.content}</p>
           </Row>
         </Col>
-        <Col sm={3}>
+        <Col sm={3} hidden={false}>
           <Figure.Image width={300} height={300} src={imgURL}></Figure.Image>
           <Figure.Caption>{`${createDate.getFullYear()}-${createDate.getDate()}-${createDate.getDay()} ${createDate.getHours()}:${createDate.getMinutes()}:${createDate.getSeconds()} 上傳`}</Figure.Caption>
         </Col>
