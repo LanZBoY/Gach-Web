@@ -4,6 +4,7 @@ import { storage } from "../utils/firebaseAPI";
 import { ref, getDownloadURL } from "firebase/storage";
 import "./PhotoView.css";
 const Postview = ({ item }) => {
+  console.log(this)
   const [imgURL, setimgURL] = useState(null);
   const createDate = new Date(item.createTime.toMillis());
   useEffect(() => {
