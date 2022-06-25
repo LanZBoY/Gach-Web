@@ -3,10 +3,15 @@ import { useState, useEffect } from "react";
 import { storage } from "../utils/firebaseAPI";
 import { ref, getDownloadURL } from "firebase/storage";
 import "./PhotoView.css";
-const Postview = ({ item }) => {
+const Postview = ({id, item}) => {
+  const [hideImg, setHideImg] = useState(false);
   const [imgURL, setimgURL] = useState(null);
   const createDate = new Date(item.createTime.toMillis());
   useEffect(() => {
+    if(item.photoPath === undefined){
+      setHideImg(true)
+      return;
+    }
     const pathRef = ref(storage, "Photo/" + item.photoPath);
     getDownloadURL(pathRef).then((url) => {
       setimgURL(url);
@@ -23,7 +28,7 @@ const Postview = ({ item }) => {
             <p>{item.content}</p>
           </Row>
         </Col>
-        <Col sm={3} hidden={false}>
+        <Col sm={3} hidden={hideImg}>
           <Figure.Image width={300} height={300} src={imgURL}></Figure.Image>
           <Figure.Caption>{`${createDate.getFullYear()}-${createDate.getDate()}-${createDate.getDay()} ${createDate.getHours()}:${createDate.getMinutes()}:${createDate.getSeconds()} 上傳`}</Figure.Caption>
         </Col>

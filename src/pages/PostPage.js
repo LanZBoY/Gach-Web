@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Bar from "../components/Bar";
 import { firestore } from "../utils/firebaseAPI";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, Timestamp, addDoc, getDoc, doc} from "firebase/firestore";
 import Postview from "../components/PostView";
 import { Button, Container, Form, Modal, Figure } from "react-bootstrap";
 
@@ -12,12 +12,12 @@ const PostPage = () => {
   const [previewImgURL, setPreviewImgURL] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const openAddModal = () => {
-    setPreviewImgURL(null);
-    setUploadDocs({});
-    setHidePreviewImg(true);
     setShowAddModal(true);
   };
   const closeAddModal = () => {
+    setUploadDocs({});
+    setPreviewImgURL(null);
+    setHidePreviewImg(true);
     setShowAddModal(false);
   };
 
@@ -33,6 +33,29 @@ const PostPage = () => {
         });
       });
     });
+  }
+
+  async function uploadDoc() {
+    // 純文檔部分新增功能
+    uploadDocs.createTime = Timestamp.fromDate(new Date());
+    const postCollection = collection(firestore, "post");
+    const result = await addDoc(postCollection, uploadDocs);
+    console.log(result.id)
+    const docRef = doc(firestore, "post", result.id);
+    const newDoc = await getDoc(docRef);
+    console.log(newDoc);
+    if(newDoc.exists()){
+      const data = {
+        id: newDoc.id,
+        item: newDoc.data(),
+      };
+      setDocs((prev) => {
+        return [data, ...prev];
+      })
+    }
+    // 圖片上船功能
+
+    closeAddModal();
   }
 
   function handleUploadDocChange(event) {
@@ -63,10 +86,6 @@ const PostPage = () => {
     }
   }
 
-  function uploadDoc() {
-    console.log(uploadDocs);
-  }
-
   useEffect(() => {
     getPosts();
   }, []);
@@ -77,7 +96,7 @@ const PostPage = () => {
       <Button onClick={openAddModal}>新增</Button>
       <Container>
         {docs.map((item) => {
-          return <Postview item={item.item} key={item.id} />;
+          return <Postview id={item.id} item={item.item} key={item.id} />;
         })}
       </Container>
       {/* 上傳貼文 */}
