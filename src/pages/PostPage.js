@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Bar from "../components/Bar";
-import { firestore } from "../utils/firebaseAPI";
+import { firestore, storage } from "../utils/firebaseAPI";
 import { collection, getDocs, Timestamp, addDoc, getDoc, doc} from "firebase/firestore";
 import Postview from "../components/PostView";
 import { Button, Container, Form, Modal, Figure } from "react-bootstrap";
+import { ref, uploadBytes } from "firebase/storage";
 
 const PostPage = () => {
   const [docs, setDocs] = useState([]);
   const [uploadDocs, setUploadDocs] = useState({});
+  const [uploadPhoto, setUploadPhoto] = useState(undefined);
   const [hidePreviewImg, setHidePreviewImg] = useState(true);
   const [previewImgURL, setPreviewImgURL] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -38,12 +40,18 @@ const PostPage = () => {
   async function uploadDoc() {
     // 純文檔部分新增功能
     uploadDocs.createTime = Timestamp.fromDate(new Date());
+    // 圖片上傳功能
+    if(uploadPhoto !== undefined){
+      console.log(uploadPhoto);
+      uploadDocs.photoPath = uploadPhoto.name;
+      const uploadPhotoRef = ref(storage, `/Photo/${uploadPhoto.name}`);
+      const uploadResult = await uploadBytes(uploadPhotoRef, uploadPhoto);
+      console.log(uploadResult);
+    }
     const postCollection = collection(firestore, "post");
     const result = await addDoc(postCollection, uploadDocs);
-    console.log(result.id)
     const docRef = doc(firestore, "post", result.id);
     const newDoc = await getDoc(docRef);
-    console.log(newDoc);
     if(newDoc.exists()){
       const data = {
         id: newDoc.id,
@@ -53,8 +61,6 @@ const PostPage = () => {
         return [data, ...prev];
       })
     }
-    // 圖片上船功能
-
     closeAddModal();
   }
 
@@ -72,10 +78,7 @@ const PostPage = () => {
     } else if (event.target.id === "UploadFile") {
       const file = event.target.files[0];
       if (file !== undefined) {
-        setUploadDocs((prev) => {
-          prev.file = file;
-          return prev;
-        });
+        setUploadPhoto(file);
         const fileReader = new FileReader();
         fileReader.onload = function () {
           setPreviewImgURL(this.result);
@@ -85,7 +88,6 @@ const PostPage = () => {
       }
     }
   }
-
   useEffect(() => {
     getPosts();
   }, []);
