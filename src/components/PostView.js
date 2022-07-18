@@ -1,4 +1,4 @@
-import { Col, Figure, Row } from "react-bootstrap";
+import { Button, Col, Figure, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { storage } from "../utils/firebaseAPI";
 import { ref, getDownloadURL } from "firebase/storage";
@@ -17,6 +17,11 @@ const Postview = ({id, item}) => {
       setimgURL(url);
     });
   }, [item.photoPath]);
+
+  function deleteDoc(){
+    console.log(item)
+  }
+
   return (
     <>
       <Row className="post">
@@ -31,6 +36,7 @@ const Postview = ({id, item}) => {
         <Col sm={3} hidden={hideImg}>
           <Figure.Image width={300} height={300} src={imgURL}></Figure.Image>
           <Figure.Caption>{`${createDate.getFullYear()}-${createDate.getDate()}-${createDate.getDay()} ${createDate.getHours()}:${createDate.getMinutes()}:${createDate.getSeconds()} 上傳`}</Figure.Caption>
+          <Button onClick={deleteDoc} variant="danger">刪除</Button>
         </Col>
       </Row>
     </>
