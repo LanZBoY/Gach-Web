@@ -3,13 +3,8 @@ import { useState, useEffect } from "react";
 import { storage } from "../utils/firebaseAPI";
 import { ref, getDownloadURL } from "firebase/storage";
 import "./PhotoView.css";
-<<<<<<< HEAD
-const Postview = ({ item }) => {
-  console.log(this)
-=======
 const Postview = ({id, item}) => {
   const [hideImg, setHideImg] = useState(false);
->>>>>>> bf5351625861fe71ecf693b2db826aa4522fc57b
   const [imgURL, setimgURL] = useState(null);
   const createDate = new Date(item.createTime.toMillis());
   useEffect(() => {
