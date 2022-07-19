@@ -42,11 +42,9 @@ const PostPage = () => {
     uploadDocs.createTime = Timestamp.fromDate(new Date());
     // 圖片上傳功能
     if(uploadPhoto !== undefined){
-      console.log(uploadPhoto);
       uploadDocs.photoPath = uploadPhoto.name;
       const uploadPhotoRef = ref(storage, `/Photo/${uploadPhoto.name}`);
       const uploadResult = await uploadBytes(uploadPhotoRef, uploadPhoto);
-      console.log(uploadResult);
     }
     const postCollection = collection(firestore, "post");
     const result = await addDoc(postCollection, uploadDocs);
