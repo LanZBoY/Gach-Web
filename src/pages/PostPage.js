@@ -107,7 +107,7 @@ const PostPage = () => {
         <Modal.Body>
           <Form>
             <Form.Label>標題</Form.Label>
-            <Form.Control
+            <Form.Control 
               id="UploadTitle"
               type="text"
               onChange={handleUploadDocChange}
