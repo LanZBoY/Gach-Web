@@ -44,7 +44,7 @@ const PostPage = () => {
     if(uploadPhoto !== undefined){
       uploadDocs.photoPath = uploadPhoto.name;
       const uploadPhotoRef = ref(storage, `/Photo/${uploadPhoto.name}`);
-      const uploadResult = await uploadBytes(uploadPhotoRef, uploadPhoto);
+      await uploadBytes(uploadPhotoRef, uploadPhoto);
     }
     const postCollection = collection(firestore, "post");
     const result = await addDoc(postCollection, uploadDocs);
